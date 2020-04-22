@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using BusinessMudanzas;
 using Microsoft.AspNetCore.Mvc;
+using WebApiMudanzas.Models;
 
 namespace WebApiMudanzas.Controllers
 {
@@ -16,6 +13,15 @@ namespace WebApiMudanzas.Controllers
         public IActionResult Get()
         {
             return Ok(true);
+        }
+
+        [HttpPost]
+        public ActionResult PostUpload([FromForm]FileUpload fileUpload)
+        {
+            var enlistmen = new EnlistmentBusiness();
+            string nameUser = fileUpload.Name;
+            var resultText = enlistmen.StartProcess(fileUpload.File);
+            return Ok(new { status = true, message = resultText });
         }
     }
 }
