@@ -14,7 +14,7 @@ namespace demo
 
         private void test()
         {
-            calc = new CalculateMovements();
+            calc = new EnlistmentBusiness();
 
             var lists = calc.GetLists("5 \n" +
 "4 \n" +

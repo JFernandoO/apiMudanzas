@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApiMudanzas</name>
+    </assembly>
+    <members>
+        <member name="M:WebApiMudanzas.Controllers.EnlistmentController.Get">
+            <summary>
+            Prueba de la aplicacion
+            </summary>
+            <returns>Mensaje de exito</returns>
+        </member>
+        <member name="M:WebApiMudanzas.Controllers.EnlistmentController.PostUpload(WebApiMudanzas.Models.FileUpload)">
+            <summary>
+            Obtener la lista de viajes a partir de un archivo
+            </summary>
+            <param name="fileUpload">Archivo con los datos</param>
+            <returns>Número de viajes por día</returns>
+        </member>
+    </members>
+</doc>
