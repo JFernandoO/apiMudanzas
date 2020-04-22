@@ -1,5 +1,8 @@
 ﻿using BusinessMudanzas;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using WebApiMudanzas.Models;
 
 namespace WebApiMudanzas.Controllers
@@ -26,10 +29,34 @@ namespace WebApiMudanzas.Controllers
         [HttpPost]
         public IActionResult PostUpload([FromForm]FileUpload fileUpload)
         {
+            //if (fileUpload.File != null)
+            //{
             var enlistmen = new EnlistmentBusiness();
             string nameUser = fileUpload.Name;
             var resultText = enlistmen.StartProcess(fileUpload.File);
-            return Ok(new { status = true, message = resultText });
+            return Content(resultText);
+            //    //var fileName = "myfileName.txt";
+            //    //var mimeType = "text/plain";
+            //    //Stream stream = await GetFileStreamById(resultText);
+
+            //    //return new FileStreamResult(stream, mimeType)
+            //    //{
+            //    //    FileDownloadName = fileName
+            //    //};
+
+            //}
+            //return Ok(new { message = "ddddd"});
+            //return null;
+        }
+
+        private async Task<Stream> GetFileStreamById(string resultText)
+        {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(resultText);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }
