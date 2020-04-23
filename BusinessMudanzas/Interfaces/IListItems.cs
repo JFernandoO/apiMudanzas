@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace BusinessMudanzas
 {
-    public interface ICalculateMovements
+    public interface IListItems
     {
         IList<WorkDay> GetLists(string fileString);
-        int GetTravelsRecursive(WorkDay workday);
-        string GetTotaltravels(IList<WorkDay> lists);
     }
 }
