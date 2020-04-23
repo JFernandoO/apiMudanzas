@@ -1,4 +1,5 @@
 ﻿using BusinessMudanzas;
+using DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -7,10 +8,33 @@ using WebApiMudanzas.Models;
 
 namespace WebApiMudanzas.Controllers
 {
+    /// <summary>
+    /// Controlador principal
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class EnlistmentController : ControllerBase
     {
+        /// <summary>
+        /// Logica de los calculos y movimientos
+        /// </summary>
+        private readonly ICalculateMovements _calculateMovements;
+        
+        /// <summary>
+        /// Logia de manejo de archivos
+        /// </summary>
+        private readonly IFiles _files;
+        
+        /// <summary>
+        /// Logica de listas
+        /// </summary>
+        private readonly IListItems _listItems;
+
+        /// <summary>
+        /// Logica de listas
+        /// </summary>
+        private readonly IRepository _db;
+
         /// <summary>
         /// Prueba de la aplicacion
         /// </summary>
@@ -29,34 +53,17 @@ namespace WebApiMudanzas.Controllers
         [HttpPost]
         public IActionResult PostUpload([FromForm]FileUpload fileUpload)
         {
-            //if (fileUpload.File != null)
-            //{
-            var enlistmen = new EnlistmentBusiness();
-            string nameUser = fileUpload.Name;
-            var resultText = enlistmen.StartProcess(fileUpload.File);
-            return Content(resultText);
-            //    //var fileName = "myfileName.txt";
-            //    //var mimeType = "text/plain";
-            //    //Stream stream = await GetFileStreamById(resultText);
-
-            //    //return new FileStreamResult(stream, mimeType)
-            //    //{
-            //    //    FileDownloadName = fileName
-            //    //};
-
-            //}
-            //return Ok(new { message = "ddddd"});
-            //return null;
-        }
-
-        private async Task<Stream> GetFileStreamById(string resultText)
-        {
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
-            writer.Write(resultText);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
+            if (fileUpload.File != null)
+            {
+                string nameUser = fileUpload.Name;
+                var enlistmen = new ProcessBusiness();
+                var resultText = enlistmen.GetProcess(fileUpload);
+                return Content(resultText);
+            }
+            else
+            {
+                throw new Exception("Archivo no encontrado");
+            }
         }
     }
 }

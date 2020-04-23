@@ -4,9 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +29,13 @@ namespace WebApiMudanzas
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //var db = SingletonDataContainer.Instance;
+            //services.AddDbContext<MyContext>(options =>
+            //    options.UseSqlServer(Configuration.GetSection("SQLDBCONN").GetSection("MySQLConnStr").Value));
+            //var db = SingletonDataContainer.Instance;
+
+            SingletonDataContainer.strConnect = Configuration.GetSection("SQLDBCONN").GetSection("MySQLConnStr").Value;
+
             // Add CORS policy
             services.AddCors(options =>
             {
@@ -59,6 +68,7 @@ namespace WebApiMudanzas
                 c.IncludeXmlComments(xmlPath);
             });
 
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

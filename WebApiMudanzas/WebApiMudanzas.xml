@@ -4,6 +4,31 @@
         <name>WebApiMudanzas</name>
     </assembly>
     <members>
+        <member name="T:WebApiMudanzas.Controllers.EnlistmentController">
+            <summary>
+            Controlador principal
+            </summary>
+        </member>
+        <member name="F:WebApiMudanzas.Controllers.EnlistmentController._calculateMovements">
+            <summary>
+            Logica de los calculos y movimientos
+            </summary>
+        </member>
+        <member name="F:WebApiMudanzas.Controllers.EnlistmentController._files">
+            <summary>
+            Logia de manejo de archivos
+            </summary>
+        </member>
+        <member name="F:WebApiMudanzas.Controllers.EnlistmentController._listItems">
+            <summary>
+            Logica de listas
+            </summary>
+        </member>
+        <member name="F:WebApiMudanzas.Controllers.EnlistmentController._db">
+            <summary>
+            Logica de listas
+            </summary>
+        </member>
         <member name="M:WebApiMudanzas.Controllers.EnlistmentController.Get">
             <summary>
             Prueba de la aplicacion
